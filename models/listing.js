@@ -30,6 +30,7 @@ const listingSchema = new Schema({
 
   category: {
     type: String,
+    default: "General",
   },
 
 });
@@ -38,5 +39,4 @@ const listingSchema = new Schema({
 
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;
-
 

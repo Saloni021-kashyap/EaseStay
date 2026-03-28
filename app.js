@@ -79,9 +79,10 @@ app.use((req, res, next) => {
 
 app.get("/", async (req, res) => {
   try {
+    const category = req.query.category || "";
     const allListings = await Listing.find({});
     console.log("Found listings:", allListings.length);
-    res.render("listings/index.ejs", { allListings });
+    res.render("listings/index.ejs", { allListings, category });
   } catch (err) {
     console.error("Error fetching listings:", err);
     res.status(500).send("Error fetching listings");
@@ -107,17 +108,10 @@ app.use((req, res, next ) =>{
    next(new ExpressError(404, "Page Not Found!"));
 });
  
-
-// app.use((err,req,res,next) =>{
-//   let {statusCode = 500, 
-//     message="Somthing went wrong!"} = err;
-//  res.status (statusCode).render("error.ejs",{message});
-// });
 app.use((err, req, res, next) => {
   let { statusCode = 500, message = "Something went wrong!" } = err;
   res.status(statusCode).render("error.ejs", { message });
 });
-
 
 
 

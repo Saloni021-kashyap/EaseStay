@@ -1,12 +1,17 @@
 const Listing = require("../models/listing");
 
 module.exports.index = async (req, res) => {
+  const category = req.query.category || "";
   let filter = {};
-  if (req.query.category) {
-    filter.category = req.query.category;
+  if (category) {
+    filter.category = category;
   }
   const allListings = await Listing.find(filter);
-  res.render("listings/index.ejs", { allListings, category: req.query.category });
+  const noListingsMessage = category && allListings.length === 0
+    ? "No listings found for this category"
+    : "";
+
+  res.render("listings/index.ejs", { allListings, category, noListingsMessage });
 };
 
 
@@ -101,8 +106,6 @@ module.exports.destroyListing = async (req, res) => {
   req.flash("success", "Listing Deleted!");
   res.redirect("/listings");
 }
-
-
 
 
 
