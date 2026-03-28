@@ -1,0 +1,129 @@
+<% layout("/layouts/boilerplate") %>
+
+<button
+  class="btn btn-outline-dark d-lg-none mb-2"
+  type="button"
+  data-bs-toggle="collapse"
+  data-bs-target="#filtersCollapse"
+  aria-expanded="false"
+  aria-controls="filtersCollapse"
+>
+  Filters
+</button>
+
+
+<div class="collapse d-lg-block" id="filtersCollapse">
+
+  <div id="filters">
+    <a href="/listings" class="filter <%= !category ? 'active' : '' %>">
+      <div><i class="fa-solid fa-border-all"></i></div>
+      <p>All</p>
+    </a>
+
+    <a href="/listings?category=Trending" class="filter <%= category === 'Trending' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-fire"></i></div>
+      <p>Trending</p>
+    </a>
+
+    <a href="/listings?category=Rooms" class="filter <%= category === 'Rooms' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-bed"></i></div>
+      <p>Rooms</p>
+    </a>
+
+    <a href="/listings?category=Iconic cities" class="filter <%= category === 'Iconic cities' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-mountain-city"></i></div>
+      <p>Iconic cities</p>
+    </a>
+
+    <a href="/listings?category=Mountains" class="filter <%= category === 'Mountains' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-mountain"></i></div>
+      <p>Mountains</p>
+    </a>
+
+    <a href="/listings?category=Amazing Pools" class="filter <%= category === 'Amazing Pools' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-person-swimming"></i></div>
+      <p>Amazing Pools</p>
+    </a>
+
+    <a href="/listings?category=Farm" class="filter <%= category === 'Farm' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-cow"></i></div>
+      <p>Farm</p>
+    </a>
+
+    <a href="/listings?category=Arctic" class="filter <%= category === 'Arctic' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-snowflake"></i></div>
+      <p>Arctic</p>
+    </a>
+
+    <a href="/listings?category=Bed & breakfast" class="filter <%= category === 'Bed & breakfast' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-mug-hot"></i></div>
+      <p>Bed & breakfast</p>
+    </a>
+
+    <a href="/listings?category=Domes" class="filter <%= category === 'Domes' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-landmark-dome"></i></div>
+      <p>Domes</p>
+    </a>
+
+    <a href="/listings?category=Boats" class="filter <%= category === 'Boats' ? 'active' : '' %>">
+      <div><i class="fa-solid fa-ship"></i></div>
+      <p>Boats</p>
+    </a>
+
+    <div class="tax-toggle">
+      <div class="form-check-reverse form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+        <label class="form-check-label" for="switchCheckDefault">Display total after Taxes</label>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 listing-grid">
+  <% for (let listing of allListings) { %>
+
+    <div class="col">
+      <a href="/listings/<%= listing._id %>" class="text-decoration-none listing-link">
+        <div class="card listing-card">
+
+          <!-- Image -->
+          <img 
+            src="<%= listing.image.url %>" 
+            class="card-img-top"
+            alt="listing_image"
+          />
+          <div class="card-body">
+            <h5 class="card-title-custom"><%= listing.title %></h5>
+            <p class="card-location"><%= listing.location %>, <%= listing.country %></p>
+            <p class="card-price">
+              &#8377; <%= listing.price.toLocaleString("en-IN") %> / night
+              <i class="tax-info"> &nbsp; &nbsp;+18% GST</i>
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  <% } %>
+</div>
+
+
+<script>
+  let taxSwitch = document.getElementById("switchCheckDefault");
+  taxSwitch.addEventListener("click", () => {
+   let taxInfo = document.getElementsByClassName("tax-info");
+    for(info of taxInfo) {
+      if(info.style.display != "inline") {
+        info.style.display = "inline";
+      } else {
+        info.style.display = "none";
+      }
+      
+    }
+   });
+ 
+</script>
+
+
+
