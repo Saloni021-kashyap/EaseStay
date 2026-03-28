@@ -81,7 +81,7 @@
 
 
 
-<% if (noListingsMessage) { %>
+<% if (typeof noListingsMessage !== "undefined" && noListingsMessage) { %>
   <p class="text-center mt-4"><%= noListingsMessage %></p>
 <% } %>
 
@@ -128,5 +128,4 @@
    });
  
 </script>
-
 

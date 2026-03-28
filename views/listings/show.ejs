@@ -45,7 +45,35 @@
     <hr>
     <h4>Leave a Review</h4>
 
-    <!-- form same as yours -->
+    <form
+      method="POST"
+      action="/listings/<%= listing._id %>/reviews"
+      class="needs-validation"
+      novalidate
+    >
+      <div class="mb-3">
+        <label class="form-label">Rating</label><br>
+        <input type="radio" name="review[rating]" value="1" required> &#9733;
+        <input type="radio" name="review[rating]" value="2"> &#9733;&#9733;
+        <input type="radio" name="review[rating]" value="3"> &#9733;&#9733;&#9733;
+        <input type="radio" name="review[rating]" value="4"> &#9733;&#9733;&#9733;&#9733;
+        <input type="radio" name="review[rating]" value="5"> &#9733;&#9733;&#9733;&#9733;&#9733;
+        <div class="invalid-feedback">Please give a rating between 1 and 5.</div>
+      </div>
+
+      <div class="mb-3">
+        <label for="comment" class="form-label">Comment</label>
+        <textarea
+          name="review[comment]"
+          id="comment"
+          class="form-control"
+          required
+        ></textarea>
+        <div class="invalid-feedback">Please write a review comment.</div>
+      </div>
+
+      <button class="btn btn-dark">Submit Review</button>
+    </form>
 
     <hr>
     <% } %>
@@ -68,6 +96,7 @@
           </p>
 
           <p class="card-text"><%= review.comment %></p>
+          <p class="card-text">Rating: <%= review.rating %> &#11088;</p>
 
           <form class="mb-3"
                 method="Post"
@@ -83,7 +112,6 @@
   </div>
 
   <div class="col-6 offset-3">
-    <h3>Where you'll be</h3>
     <div id="map"></div>
   </div>
 </div>
