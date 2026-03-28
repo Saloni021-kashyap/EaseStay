@@ -19,3 +19,15 @@
 )
   })
 })()
+
+const navbarToggle = document.querySelector("#navbarToggle");
+const navbarMenu = document.querySelector("#navbarNavAltMarkup");
+
+if (navbarToggle && navbarMenu) {
+  navbarToggle.addEventListener("click", () => {
+    navbarMenu.classList.toggle("show-menu");
+
+    const isExpanded = navbarMenu.classList.contains("show-menu");
+    navbarToggle.setAttribute("aria-expanded", isExpanded);
+  });
+}

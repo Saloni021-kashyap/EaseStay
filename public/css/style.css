@@ -381,6 +381,15 @@ body{
     }
 
     .navbar-shell {
+        display: none !important;
+        width: 100%;
+    }
+
+    .navbar-shell.show-menu {
+        display: flex !important;
+    }
+
+    .navbar-shell {
         gap: 1rem;
     }
 
